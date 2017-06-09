@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>器材注册</title>
+<link rel="stylesheet" href="../resources/layui/css/layui.css" media="all">
+<style>
+body {
+    margin: 10px;
+}
+</style>
+</head>
+<body>
+
+    <blockquote class="layui-elem-quote">北京电务段备品管理系统</blockquote>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>器材注册</legend>
+    </fieldset>
+    
+    <div>
+        <form class="layui-form" id="deviceForm" action="">
+        
+            <div class="layui-form-item">
+                <label class="layui-form-label">器材类型</label>
+                <div class="layui-input-block">
+                    <select id="type" name="typeId" lay-filter="typ" lay-verify="required">
+                        <option value="1">1</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">存放地点</label>
+                <div class="layui-input-block">
+                    <select id="location" name="locationId" lay-filter="loca" lay-verify="required">
+                        <option>1</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">存放位置</label>
+                <div class="layui-input-block">
+                    <select id="place" name="placeId" lay-filter="plac" lay-verify="required">
+                        <option value="0">默认位置</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">器材编号</label>
+                <div class="layui-input-block">
+                    <input type="text" id="serial" lay-verify="required" name="deviceNo" class="layui-input" placeholder="器材编号"/>
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" id="remark" lay-verify="required" name="remark" class="layui-input" placeholder="请输入备注"/>
+                </div>
+            </div>
+            
+        </form>
+	        <div class="layui-form-item">
+	            <label class="layui-form-label"> </label>
+	            <div class="layui-input-block">
+	                <button class="layui-btn" id="submitRegist" >确认新增设备</button>
+	            </div>
+	        </div>
+    </div>
+
+    <script src="../resources/layui/layui.js"></script>
+    <script src="../resources/js/jquery.min.js"></script>
+    <script src="../resources/js/dateUtil.js"></script>
+    <script src="../resources/js/deviceRegist.js"></script>
+</body>
+</html>

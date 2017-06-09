@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>设备列表</title>
+<link rel="stylesheet" href="../resources/layui/css/layui.css" media="all">
+<style>
+body {
+    margin: 10px;
+}
+</style>
+</head>
+<body>
+
+    <blockquote class="layui-elem-quote">北京电务段备品管理系统</blockquote>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend id="leg-name">检查记录</legend>
+    </fieldset>
+    <div id="submitFormDiv"></div>
+    <div>
+        <form class="layui-form" action="/deviceSys/device/writeCheckRecordExcel.do" id="form1" method="POST">
+        
+            <input type="hidden" id="locationId" name="locationId" value="" />
+        
+            <div class="layui-form-item">
+                <label class="layui-form-label">录入人</label>
+                <div class="layui-input-block">
+                    <input type="text" id="remark" name="name" lay-verify="required" class="layui-input" placeholder="请输入扫码人姓名"/>
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择文件</label>
+                <div class="layui-input-block">
+                    <input type="file" id="files" name="files" lay-verify="required" class="layui-input" placeholder="请选择文件"/>
+                </div>
+            </div>
+            
+        </form>
+        <div class="layui-form-item">
+            <label class="layui-form-label"> </label>
+            <div class="layui-input-block">
+                <button class="layui-btn" id="submitExcel">提交</button>
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table">
+        <colgroup>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>设备类型</th>
+                <th>名称</th>
+                <th>设备序列号</th>
+                <th>检查时间</th>
+                <th>录入人</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script src="../resources/layui/layui.js"></script>
+    <script src="../resources/js/jquery-3.2.1.min.js"></script>
+    <script src="../resources/js/dateUtil.js"></script>
+    <script src="../resources/js/jquery.form.min.js"></script>
+    <script src="../resources/js/deviceCheck.js"></script>
+    <script src="../resources/js/warningUtil.js"></script>
+</body>
+</html>
