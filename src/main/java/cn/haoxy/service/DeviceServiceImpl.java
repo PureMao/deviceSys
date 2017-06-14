@@ -229,21 +229,6 @@ public class DeviceServiceImpl implements DeviceService{
 		saveQrRecords(deviceShouldSet,deviceRealSet,excel);
 	}
 	
-	private int saveSingleCheckRecord(DeviceCheck record,int locationId,String deviceNo){
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("deviceNo",deviceNo);
-		map.put("locationId",locationId);
-		// 如果该设备不在这个工区或者该设备根本不存在，则跳过
-		Integer id = deviceCheckMapper.selectDeviceIdBySerial(map);
-		if(id == null || id == 0){
-			return ConstVal.ZERO;
-		}else{
-			record.setDeviceId(id);
-			int result = deviceCheckMapper.insert(record);
-			return result;
-		}
-	}
-	
 	private ExcelRecord saveExcelRecordAndReturn(int locationId,String name){
 		ExcelRecord excel = new ExcelRecord();
 		excel.setUserId(0); // FIXME 暂时用0
@@ -254,6 +239,14 @@ public class DeviceServiceImpl implements DeviceService{
 		excel.setDeleteMark(ConstVal.NO_DELETE_MARK);
 		excelRecordMapper.insertSelective(excel);
 		return excel;
+	}
+	
+	private List<Device> selectDeviceShouldListByLocationId(int locationId){
+		DeviceExample example = new DeviceExample();
+		DeviceExample.Criteria criteria = example.createCriteria();
+		criteria.andLocationIdEqualTo(locationId).andQuitMarkEqualTo(ConstVal.NO_DELETE_MARK);
+		List<Device> deviceShouldList = deviceMapper.selectByExample(example);
+		return deviceShouldList;
 	}
 	
 	private void saveQrRecords(Set<String> deviceShouldSet,Set<String> deviceRealSet,ExcelRecord excelRecord){
@@ -271,14 +264,21 @@ public class DeviceServiceImpl implements DeviceService{
 		}
 	}
 	
-	private List<Device> selectDeviceShouldListByLocationId(int locationId){
-		DeviceExample example = new DeviceExample();
-		DeviceExample.Criteria criteria = example.createCriteria();
-		criteria.andLocationIdEqualTo(locationId).andQuitMarkEqualTo(ConstVal.NO_DELETE_MARK);
-		List<Device> deviceShouldList = deviceMapper.selectByExample(example);
-		return deviceShouldList;
+	private int saveSingleCheckRecord(DeviceCheck record,int locationId,String deviceNo){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("deviceNo",deviceNo);
+		map.put("locationId",locationId);
+		// 如果该设备不在这个工区或者该设备根本不存在，则跳过
+		Integer id = deviceCheckMapper.selectDeviceIdBySerial(map);
+		if(id == null || id == 0){
+			return ConstVal.ZERO;
+		}else{
+			record.setDeviceId(id);
+			int result = deviceCheckMapper.insert(record);
+			return result;
+		}
 	}
-//	
+
 //	private List<Device> selectDeviceRealListByLocationId(int locationId,List<String> deviceNoList){
 //		DeviceExample example = new DeviceExample();
 //		DeviceExample.Criteria criteria = example.createCriteria();

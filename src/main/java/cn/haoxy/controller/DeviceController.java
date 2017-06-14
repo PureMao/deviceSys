@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -281,7 +282,17 @@ public class DeviceController {
 			while (rows.hasNext()) {
 				Row row = rows.next();
 				Iterator<Cell> cells = row.cellIterator();
-				deviceNoList.add(cells.next().getStringCellValue());
+				Cell cell = cells.next();
+				String val = null;
+				if(cell.getCellTypeEnum() == CellType.STRING){
+					val = cell.getStringCellValue();
+					if(val != null && !"".equals(val.trim()) ){
+						deviceNoList.add(val);
+					}
+				}else if(cell.getCellTypeEnum() == CellType.NUMERIC){
+					val = cell.getNumericCellValue() + "";
+					deviceNoList.add(val);
+				}
 			}
 			int result = deviceService.saveCheckRecord(deviceNoList,locationId,name);
 			logger.info("插入结束，共计"+result+"条记录");

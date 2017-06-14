@@ -37,11 +37,17 @@ layui.use([ 'layer', 'laypage', 'element','form' ], function() {
 		if($('#remark').val() == null || typeof($('#remark').val()) == undefined || $('#remark').val() == ""){
 			layer.msg("请填写录入人姓名.");
 		}else{
+			var index_p = layer.open({
+				  type:3
+				  ,content:'uploading...'
+				}); 
+			
 			var form = $('#form1').ajaxSubmit({target:"submitFormDiv"});
 			var xhr = form.data('jqxhr');
 			xhr.done(function(data) {
 				console.log(data);
 				if(data.code == 0){
+					layer.close(index_p);
 					var count = data.body.insertCount;
 					if(isNaN(count) || count == 0){
 						layer.msg("读取文件完毕，没有符合条件的检查记录。");
@@ -52,6 +58,7 @@ layui.use([ 'layer', 'laypage', 'element','form' ], function() {
 						 },1500);
 					}
 				}else{
+					layer.close(index_p);
 					layer.msg("上传失败,请检查文件格式或网络连接");
 				}
 			});
