@@ -325,7 +325,11 @@
   <update id="updateQuitDeviceById" parameterType="cn.haoxy.model.Device">
     update device set quit_mark = 2 , quit_time = #{quitTime,jdbcType=BIGINT},remark = #{remark,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
   </update>
-
+  
+  <update id="updateDevicePlace" parameterType="cn.haoxy.model.Device">
+    update device set place_id = #{placeId,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+  </update>
+  
   <update id="updateByExampleSelective" parameterType="map">
     update device
     <set>

@@ -45,4 +45,6 @@ public interface DeviceMapper {
     
     int updateQuitDeviceById(Device device);
     
+    int updateDevicePlace(Device device);
+    
 }

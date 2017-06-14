@@ -157,6 +157,7 @@ public class DeviceServiceImpl implements DeviceService{
 		String serial = device.getDeviceNo();
 		device.setQuitMark(ConstVal.NO_DELETE_MARK);
 		device.setRegisterTime(System.currentTimeMillis());
+		device.setDeviceNo(serial.trim());
 		// 检查序列号冲突
 		int existNum = deviceMapper.checkIfdeviceNoExist(device.getDeviceNo());
 		if(existNum == 0){
@@ -341,6 +342,15 @@ public class DeviceServiceImpl implements DeviceService{
 	@Override
 	public List<QrVo> selectQrJoinExcel(String deviceNo) {
 		return qrRecordMapper.selectQrJoinExcel(deviceNo);
+	}
+
+	@Override
+	public boolean updateDevicePlace(int placeId, int deviceId) {
+		Device device = new Device();
+		device.setId(deviceId);
+		device.setPlaceId(placeId);
+		boolean flag = deviceMapper.updateDevicePlace(device) > 0 ? true : false ;
+		return flag;
 	};
 	
 	

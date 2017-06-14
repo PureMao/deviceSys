@@ -38,6 +38,8 @@ public interface DeviceService {
 	
 	public boolean addPlace(Place place);
 	
+	public boolean updateDevicePlace(int placeId,int deviceId);
+	
 	public int addSingleDevice(Device device);
 	
 	public int selectCheckOverTime(int locationId);

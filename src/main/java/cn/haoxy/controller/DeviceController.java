@@ -220,6 +220,15 @@ public class DeviceController {
 	public List<Place> getPlaceList(int locationId) {
 		return deviceService.getPlaceList(locationId);
 	}
+	
+	/**
+	 * 修改存放位置
+	 */
+	@RequestMapping(value = "/updateDevicePlace.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateDevicePlace(int placeId,int deviceId){
+		return deviceService.updateDevicePlace(placeId,deviceId) ? ConstVal.SUCCESS_MARK : ConstVal.ERROR_MARK;
+	}
 
 	/**
 	 * 添加一个位置
@@ -297,11 +306,14 @@ public class DeviceController {
 				if(cell.getCellTypeEnum() == CellType.STRING){
 					val = cell.getStringCellValue();
 					if(val != null && !"".equals(val.trim()) ){
-						deviceNoList.add(val);
+						deviceNoList.add(val.trim());
 					}
 				}else if(cell.getCellTypeEnum() == CellType.NUMERIC){
-					val = cell.getNumericCellValue() + "";
-					deviceNoList.add(val);
+					cell.setCellType(CellType.STRING);
+					val = cell.getStringCellValue();
+					if(val != null && !"".equals(val.trim()) ){
+						deviceNoList.add(val.trim());
+					}
 				}
 			}
 			int result = deviceService.saveCheckRecord(deviceNoList,locationId,name);
