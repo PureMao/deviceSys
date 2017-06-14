@@ -289,20 +289,27 @@ public class DeviceServiceImpl implements DeviceService{
 //	}
 
 	@Override
-	public boolean quitDevice(Integer id) {
+	public boolean deleteDevice(Integer id) {
 		Device device = new Device();
 		device.setId(id);
 		device.setQuitTime(System.currentTimeMillis());
-		boolean flag = deviceMapper.updateQuitDeviceById(device) > 0 ? true : false ;
+		boolean flag = deviceMapper.updateDeleteDeviceById(device) > 0 ? true : false ;
 		return flag;
 	}
+	
+	@Override
+	public boolean quitDevice(Integer id,String remark){
+		Device device = new Device();
+		device.setId(id);
+		device.setRemark(remark);
+		device.setQuitTime(System.currentTimeMillis());
+		boolean flag = deviceMapper.updateQuitDeviceById(device) > 0 ? true : false ;
+		return flag;
+	};
 
 	@Override
 	public List<Device> selectQuitedDeviceByLocation(int locationId) {
-		DeviceExample example = new DeviceExample();
-		DeviceExample.Criteria criteria = example.createCriteria();
-		criteria.andLocationIdEqualTo(locationId).andQuitMarkEqualTo(ConstVal.DELETE_MARK);
-		return deviceMapper.selectByExample(example);
+		return deviceMapper.selectQuitDeviceInfoByLocationID(locationId);
 	}
 
 	@Override

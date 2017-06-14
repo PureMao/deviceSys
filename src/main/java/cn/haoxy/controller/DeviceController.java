@@ -113,12 +113,22 @@ public class DeviceController {
 	}
 	
 	/**
+	 * 删除设备
+	 */
+	@RequestMapping(value = "/deleteDevice.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteDevice(Integer id) {
+		int result = deviceService.deleteDevice(id) ? ConstVal.SUCCESS_MARK : ConstVal.ERROR_MARK;
+		return result;
+	}
+	
+	/**
 	 * 设备离场
 	 */
 	@RequestMapping(value = "/quitDevice.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int quitDevice(Integer id) {
-		int result = deviceService.quitDevice(id) ? ConstVal.SUCCESS_MARK : ConstVal.ERROR_MARK;
+	public int quitDevice(Integer id,String remark) {
+		int result = deviceService.quitDevice(id,remark) ? ConstVal.SUCCESS_MARK : ConstVal.ERROR_MARK;
 		return result;
 	}
 	

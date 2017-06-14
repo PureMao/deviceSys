@@ -46,7 +46,9 @@ public interface DeviceService {
 	
 	public int saveCheckRecord(List<String> deviceNoList,int locationId,String name);
 	
-	public boolean quitDevice(Integer id);
+	public boolean deleteDevice(Integer id);
+	
+	public boolean quitDevice(Integer id,String remark);
 	
 	public List<Device> selectQuitedDeviceByLocation(int locationId);
 	

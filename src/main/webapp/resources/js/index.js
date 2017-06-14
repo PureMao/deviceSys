@@ -15,6 +15,11 @@ layui.use([ 'layer', 'laypage', 'element' ], function() {
 				$li.append('<a href="/deviceSys/page/excelList.html?locationId='+location.id+'" target="_blank" class="layui-btn layui-btn-big">'+location.location+'</a>')
 				return $li;
 			}
+			function singleDeviceQuit(location){
+				var $li = $("<li></li>");
+				$li.append('<a href="/deviceSys/page/deviceQuit.html?locationId='+location.id+'" target="_blank" class="layui-btn layui-btn-big">'+location.location+'</a>')
+				return $li;
+			}
 			$.ajax({
 				url:"/deviceSys/device/queryLocationList.do",
 				type:"GET",
@@ -28,9 +33,11 @@ layui.use([ 'layer', 'laypage', 'element' ], function() {
 					$(".location-ul").append(singleLocation(data[i]));
 					$(".deviceCheck-ul").append(singleCheck(data[i]));
 					$(".excel-ul").append(singleExcel(data[i]));
+					$(".deviceQuit-ul").append(singleDeviceQuit(data[i]));
 				}
 				$(".location-ul li").css("margin","5px");
 				$(".deviceCheck-ul li").css("margin","5px");
 				$(".excel-ul li").css("margin","5px");
+				$(".deviceQuit-ul li").css("margin","5px");
 			});
 		});

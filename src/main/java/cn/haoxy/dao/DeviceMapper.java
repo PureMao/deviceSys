@@ -33,11 +33,16 @@ public interface DeviceMapper {
     
     List<Device> selectDeviceInfoByLocationID(Integer locationID);
     
+    List<Device> selectQuitDeviceInfoByLocationID(Integer locationID);
+    
     List<DeviceGroupCount> selectDeviceCountGroup();
     
     List<DeviceDistribution> selectDeviceDistribution(Integer typeId);
     
     int checkIfdeviceNoExist(String deviceNo);
     
+    int updateDeleteDeviceById(Device device);
+    
     int updateQuitDeviceById(Device device);
+    
 }

@@ -164,6 +164,34 @@
         device.quit_mark = -1
   </select>
   
+  <select id="selectQuitDeviceInfoByLocationID" parameterType="java.lang.Integer" resultMap="InfoResultMap">
+    select 
+        device.id as id,
+        device.type_id as type_id,
+        device_type.name as name,
+        device_type.type as type,
+        device_type.unit as unit,
+        device_type.model as model,
+        device_type.maker as maker,
+        device.place_id as place_id,
+        t_place.place as place,
+        device.location_id as location_id,
+        t_location.location as location,
+        device.device_no as device_no,
+        device.remark as remark,
+        device.register_time as register_time,
+        device.quit_time as quit_time,
+        device.quit_mark as quit_mark
+    from device
+        right join device_type on device.type_id = device_type.id 
+        right join location as t_location on device.location_id = t_location.id 
+        right join place as t_place on device.place_id = t_place.id
+    where 
+        device.location_id = #{locationID,jdbcType=INTEGER}
+      and
+        device.quit_mark = 2
+  </select>
+  
   <select id="selectDeviceCountGroup" resultMap="CountTypeResultMap">
     select 
 	 count(device.id) as number,
@@ -290,10 +318,14 @@
     select count(*) from device as d where d.device_no = #{deviceNo,jdbcType=VARCHAR}
   </select>
   
-  <update id="updateQuitDeviceById" parameterType="cn.haoxy.model.Device">
+  <update id="updateDeleteDeviceById" parameterType="cn.haoxy.model.Device">
     update device set quit_mark = 1 , quit_time = #{quitTime,jdbcType=BIGINT} where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <update id="updateQuitDeviceById" parameterType="cn.haoxy.model.Device">
+    update device set quit_mark = 2 , quit_time = #{quitTime,jdbcType=BIGINT},remark = #{remark,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+  </update>
+
   <update id="updateByExampleSelective" parameterType="map">
     update device
     <set>
