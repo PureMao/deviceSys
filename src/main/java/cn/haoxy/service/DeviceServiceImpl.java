@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -292,6 +293,7 @@ public class DeviceServiceImpl implements DeviceService{
 	public boolean deleteDevice(Integer id) {
 		Device device = new Device();
 		device.setId(id);
+		device.setDeviceNo("delete" + System.currentTimeMillis() + "-" + new Random().nextInt(200)%(101) + 100);
 		device.setQuitTime(System.currentTimeMillis());
 		boolean flag = deviceMapper.updateDeleteDeviceById(device) > 0 ? true : false ;
 		return flag;

@@ -319,7 +319,7 @@
   </select>
   
   <update id="updateDeleteDeviceById" parameterType="cn.haoxy.model.Device">
-    update device set quit_mark = 1 , quit_time = #{quitTime,jdbcType=BIGINT} where id = #{id,jdbcType=INTEGER}
+    update device set quit_mark = 1 , quit_time = #{quitTime,jdbcType=BIGINT}, device_no=#{device_no,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
   </update>
   
   <update id="updateQuitDeviceById" parameterType="cn.haoxy.model.Device">
