@@ -2,7 +2,7 @@ package cn.haoxy.restful;
 
 import java.io.Serializable;
 
-public class RestResponse implements Serializable {
+public class RestResponse<T> implements Serializable {
 	
 	private static final long serialVersionUID = -8657317762031936050L;
 
@@ -10,7 +10,7 @@ public class RestResponse implements Serializable {
 
 	private int code;
 
-	private Object body;
+	private T body;
 
 	public String getStatus() {
 		return status;
@@ -32,7 +32,7 @@ public class RestResponse implements Serializable {
 		return body;
 	}
 
-	public void setBody(Object body) {
+	public void setBody(T body) {
 		this.body = body;
 	}
 

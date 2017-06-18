@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.annotation.Resource;
-
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -267,8 +266,8 @@ public class DeviceController {
 	 */
 	@RequestMapping(value = "/selectCheckOverTime.do", method = RequestMethod.GET)
 	@ResponseBody
-	public RestResponse selectCheckOverTime(int locationId) {
-		RestResponse response = new RestResponse();
+	public RestResponse<Integer> selectCheckOverTime(int locationId) {
+		RestResponse<Integer> response = new RestResponse<Integer>();
 		response.setBody(deviceService.selectCheckOverTime(locationId));
 		response.setCode(ConstVal.SUCCESS_MARK);
 		response.setStatus(ConstVal.STATE_OK);
@@ -280,8 +279,8 @@ public class DeviceController {
 	 */
 	@RequestMapping(value = "/writeCheckRecordExcel.do", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse writeCheckRecordExcel(int locationId, MultipartFile files, String name) {
-		RestResponse response = new RestResponse();
+	public RestResponse<Map<String, Integer>> writeCheckRecordExcel(int locationId, MultipartFile files, String name) {
+		RestResponse<Map<String, Integer>> response = new RestResponse<Map<String, Integer>>();
 		String fileName = files.getOriginalFilename();
 		boolean isE2007 = false;
 		if (fileName.endsWith("xlsx")) {

@@ -77,6 +77,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return deviceMapper.selectDeviceInfoByLocationID(location.getId());
 	}
 
+	// TODO 分页
 	@Override
 	public List<DeviceCheck> queryDeviceCheckRecordByDevice(Device device) {
 		DeviceCheckExample example = new DeviceCheckExample();
@@ -86,6 +87,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return deviceCheckMapper.selectByExample(example);
 	}
 
+	// TODO 分页
 	@Override
 	public List<Location> queryLocationList() {
 		LocationExample example = new LocationExample();
@@ -95,11 +97,13 @@ public class DeviceServiceImpl implements DeviceService{
 		return locationMapper.selectByExample(example);
 	}
 
+	// TODO 分页
 	@Override
 	public List<DeviceGroupCount> selectDeviceCountGroup() {
 		return deviceMapper.selectDeviceCountGroup();
 	}
 
+	// TODO 分页
 	@Override
 	public List<DeviceDistribution> selectDeviceDistribution(Integer typeId) {
 		return deviceMapper.selectDeviceDistribution(typeId);
@@ -121,6 +125,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return result > 0 ? true : false;
 	}
 
+	// TODO 分页
 	@Override
 	public List<DeviceType> selectDeviceTypeList() {
 		DeviceTypeExample example = new DeviceTypeExample();
@@ -136,6 +141,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return result > 0 ? true : false;
 	}
 
+	// TODO 分页
 	@Override
 	public List<Place> getPlaceList(int locationId) {
 		PlaceExample example = new PlaceExample();
@@ -197,6 +203,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return deviceCheckMapper.selectCheckOverTime(locationId);
 	}
 
+	// TODO 分页
 	@Override
 	public List<DeviceCheckRecordVo> selectDeviceCheckRecord(int locationId) {
 		return deviceCheckMapper.selectDeviceCheckRecord(locationId);
@@ -243,6 +250,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return excel;
 	}
 	
+	// TODO 分页
 	private List<Device> selectDeviceShouldListByLocationId(int locationId){
 		DeviceExample example = new DeviceExample();
 		DeviceExample.Criteria criteria = example.createCriteria();
@@ -312,11 +320,13 @@ public class DeviceServiceImpl implements DeviceService{
 		return flag;
 	};
 
+	// TODO 分页
 	@Override
 	public List<Device> selectQuitedDeviceByLocation(int locationId) {
 		return deviceMapper.selectQuitDeviceInfoByLocationID(locationId);
 	}
 
+	// TODO 分页
 	@Override
 	public List<ExcelRecord> selectExcelRecordByLocation(int locationId) {
 		ExcelRecordExample example = new ExcelRecordExample();
@@ -325,6 +335,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return excelRecordMapper.selectByExample(example);
 	}
 
+	// TODO 分页
 	@Override
 	public List<QrRecord> selectDeviceQrRecordByDevice(String deviceNo) {
 		QrRecordExample example = new QrRecordExample();
@@ -333,6 +344,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return qrRecordMapper.selectByExample(example);
 	};
 	
+	// TODO 分页
 	@Override
 	public List<QrRecord> selectDeviceQrRecordByExcel(int excelRecordId){
 		QrRecordExample example = new QrRecordExample();
@@ -341,6 +353,7 @@ public class DeviceServiceImpl implements DeviceService{
 		return qrRecordMapper.selectByExample(example);
 	}
 
+	// TODO 分页
 	@Override
 	public List<QrVo> selectQrJoinExcel(String deviceNo) {
 		return qrRecordMapper.selectQrJoinExcel(deviceNo);
